@@ -37,6 +37,8 @@ public class TopicoService {
         return this.topicoRepository.listarTopicos();
     }
 
+    public List<Topico> listarTopicosUsuario(Integer usuarioId){return this.topicoRepository.listarTopicosUsuario(usuarioId);}
+
     public Topico listarTopicoPorId(Integer topicoId) {
         return this.topicoRepository.listarTopicoPorId(topicoId);
     }
@@ -61,7 +63,7 @@ public class TopicoService {
         ParticipaDTORequest participaDTORequest = new ParticipaDTORequest();
         participaDTORequest.setTopicoId(topicoSave.getId());
         participaDTORequest.setUsuarioId(topicoSave.getIdUsuario());
-        participaDTORequest.setStatus(0);
+        participaDTORequest.setStatus(1);
         this.participaService.criarParticipa(participaDTORequest);
         return modelMapper.map(topicoSave, TopicoDTOResponse.class);
     }

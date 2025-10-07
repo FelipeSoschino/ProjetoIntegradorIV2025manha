@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.senac.forum_musicos.config.FileAttributeConverter;
+
 import jakarta.persistence.*;
 import jakarta.websocket.ClientEndpoint;
 
@@ -26,9 +26,8 @@ public class Post {
     @Column(name="post_texto")
     private String texto;
 
-
+    //    @Convert(converter = FileAttributeConverter.class)
     @Column(name="post_arquivo", nullable = true)
-    @Convert(converter = FileAttributeConverter.class)
     private File arquivo;
 
     @Column(name="post_data_criacao")

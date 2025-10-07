@@ -30,11 +30,13 @@ public class InstrumentoService {
     private ModelMapper modelMapper;
 
     public List<Instrumento> listarInstrumentos(){
-        return this.instrumentoRepository.findAll();
+        return this.instrumentoRepository.listarInstrumentos();
     }
 
+    public List<Instrumento> listarInstrumentosUsuario(Integer usuarioId){return this.instrumentoRepository.listarInstrumentosUsuario(usuarioId);}
+
     public Instrumento listarInstrumentoPorId(Integer instrumentoId){
-        return this.instrumentoRepository.findById(instrumentoId).orElse(null);
+        return this.instrumentoRepository.listarInstrumentoPorId(instrumentoId);
     }
 
 

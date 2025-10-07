@@ -50,14 +50,15 @@ public class PostService {
 
     public PostDTOResponse criarPost(PostDTORequest postDTORequest){
 //        Usuario usuario = usuarioRepository.listarUsuarioPorId((postDTORequest.getUsuario()));
-//        Topico topico = topicoRepository.findById(postDTORequest.getTopico()).orElse(null);
+        Topico topico = topicoRepository.listarTopicoPorId(postDTORequest.getTopico());
 
         Post post = new Post();
         post.setTexto(postDTORequest.getTexto());
         post.setData(postDTORequest.getData());
         post.setStatus(postDTORequest.getStatus());
         post.setUsuario(usuarioRepository.listarUsuarioPorId(postDTORequest.getUsuario()));
-        post.setTopico(topicoRepository.listarTopicoPorId(postDTORequest.getTopico()));
+        if (topico !=null){
+            post.setTopico(topico);}
 
         Post postSave = this.postRepository.save(post);
 //        PostDTOResponse postDTOResponse = new PostDTOResponse();

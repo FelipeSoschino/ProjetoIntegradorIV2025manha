@@ -24,7 +24,7 @@ import java.util.List;
 @Service
 public class UsuarioService {
 
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
     public UsuarioService(UsuarioRepository usuarioRepository){
         this.usuarioRepository = usuarioRepository;
@@ -38,9 +38,6 @@ public class UsuarioService {
 
     @Autowired
     private JwtTokenService jwtTokenService;
-
-    @Autowired
-    private UsuarioRepository userRepository;
 
     @Autowired
     private SecurityConfiguration securityConfiguration;
@@ -85,7 +82,6 @@ public class UsuarioService {
         usuario.setData(usuarioDTORequest.getData());
         usuario.setFoto(usuarioDTORequest.getFoto());
         usuario.setNome(usuarioDTORequest.getNome());
-        usuario.setSenha(usuarioDTORequest.getSenha());
         usuario.setSenha(securityConfiguration.passwordEncoder().encode(usuarioDTORequest.getSenha()));
         usuario.setStatus(1);
         usuario.setRoles(roles);
@@ -96,6 +92,7 @@ public class UsuarioService {
         usuarioDTOResponse.setBio(usuarioSave.getBio());
         usuarioDTOResponse.setNome(usuarioSave.getNome());
         usuarioDTOResponse.setEmail(usuarioSave.getEmail());
+        usuarioDTOResponse.setData(usuarioSave.getData());
         usuarioDTOResponse.setStatus(usuarioSave.getStatus());
         usuarioDTOResponse.setFoto(usuarioSave.getFoto());
         return usuarioDTOResponse;}

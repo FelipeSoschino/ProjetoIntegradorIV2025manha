@@ -1,7 +1,6 @@
 package com.senac.forum_musicos.repository;
 
 import com.senac.forum_musicos.entity.Topico;
-import com.senac.forum_musicos.entity.Usuario;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,4 +21,7 @@ public interface TopicoRepository extends JpaRepository<Topico, Integer> {
     List<Topico> listarTopicos();
     @Query("SELECT p FROM Topico p where p.status >= 0 AND p.id = :id")
     Topico listarTopicoPorId(@Param("id") Integer topicoId);
+
+    @Query("SELECT p FROM Topico p where p.status >=0 and p.usuario.id = :usuarioId")
+    List<Topico> listarTopicosUsuario(@Param("usuarioId")Integer usuarioId);
 }

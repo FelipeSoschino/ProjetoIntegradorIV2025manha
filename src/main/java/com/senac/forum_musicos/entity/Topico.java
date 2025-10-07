@@ -12,6 +12,54 @@ import java.util.Set;
 @Table(name ="topico")
 public class Topico {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="topico_id")
+    private int id;
+
+    @Column(name="topico_titulo")
+    private String titulo;
+
+    @Column(name = "topico_descricao")
+    private String descricao;
+
+    @Column(name="topico_data")
+    private LocalDateTime data;
+
+    @Column(name="topico_status")
+    private int status;
+
+    @Column(name="topico_categoria")
+    private int categoria;
+
+    public int getIdUsuario() {
+        return idUsuario = this.usuario.getId();
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    @Transient
+    @JsonProperty("idUsuairo")
+    private int idUsuario;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
+    @OneToMany(mappedBy = "topico")
+    public Set<Post> posts;
+
+    @OneToMany(mappedBy = "topico")
+    public Set<Comentario> comentarios;
+
+    @OneToMany(mappedBy = "topico")
+    public Set<Participa> participa;
+
+
     public int getId() {
         return id;
     }
@@ -91,54 +139,6 @@ public class Topico {
     public void setParticipa(Set<Participa> participa) {
         this.participa = participa;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="topico_id")
-    private int id;
-
-    @Column(name="topico_titulo")
-    private String titulo;
-
-    @Column(name = "topico_descricao")
-    private String descricao;
-
-    @Column(name="topico_data")
-    private LocalDateTime data;
-
-    @Column(name="topico_status")
-    private int status;
-
-    @Column(name="topico_categoria")
-    private int categoria;
-
-    public int getIdUsuario() {
-        return idUsuario = this.usuario.getId();
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    @Transient
-    @JsonProperty("idUsuairo")
-    private int idUsuario;
-
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
-
-    @OneToMany(mappedBy = "topico")
-    public Set<Post> posts;
-
-    @OneToMany(mappedBy = "topico")
-    public Set<Comentario> comentarios;
-
-    @OneToMany(mappedBy = "topico")
-    public Set<Participa> participa;
-
-
 
 
 }

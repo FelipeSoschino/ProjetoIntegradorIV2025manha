@@ -4,6 +4,7 @@ import com.senac.forum_musicos.DTO.request.TopicoDTORequest;
 import com.senac.forum_musicos.DTO.request.TopicoDTOUpdataRequest;
 import com.senac.forum_musicos.DTO.response.TopicoDTOResponse;
 import com.senac.forum_musicos.DTO.response.TopicoDTOUpdateResponse;
+import com.senac.forum_musicos.entity.Post;
 import com.senac.forum_musicos.entity.Topico;
 import com.senac.forum_musicos.service.TopicoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -67,6 +68,16 @@ public class TopicoController {
         else
             return ResponseEntity.noContent().build();
 
+    }
+
+    @GetMapping("/listarPorUsuarioId/{usuarioId}")
+    @Operation(summary = "Listar Posts pelo Id de um Usuário", description = "End point para listar uma lista de posts de um usuário dado seu Id")
+    public ResponseEntity<List<Topico>> listarPostsPorUsuarioId(@PathVariable("usuarioId")Integer usuarioId){
+        List<Topico> listaTopico = topicoService.listarTopicosUsuario(usuarioId);
+        if(listaTopico ==null)
+            return ResponseEntity.noContent().build();
+        else
+            return ResponseEntity.ok(listaTopico);
     }
 
     @PatchMapping("/atualizarStatusTopico/{topicoId}")

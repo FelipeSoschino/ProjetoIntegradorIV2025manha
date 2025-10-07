@@ -13,13 +13,16 @@ import java.util.List;
 
 @Repository
 public interface InstrumentoRepository extends JpaRepository<Instrumento, Integer> {
-//    @Modifying
-//    @Transactional
-//    @Query("UPDATE Instrumento p SET p.status = -1 where p.id = :id")
-//    void apagarInstrumento(@Param(("id")) Integer instrumentoId);
-//
-//    @Query("SELECT p FROM Instrumento p where p.status >= 0")
-//    List<Instrumento> listarInstrumentos();
-//    @Query("SELECT p FROM Instrumento p where p.status >= 0 AND p.id = :id")
-//    Instrumento listarInstrumentoPorId(@Param("id") Integer instrumentoId);
+    @Modifying
+    @Transactional
+    @Query("UPDATE Instrumento p SET p.status = -1 where p.id = :id")
+    void apagarInstrumento(@Param(("id")) Integer instrumentoId);
+
+    @Query("SELECT p FROM Instrumento p where p.status >= 0")
+    List<Instrumento> listarInstrumentos();
+    @Query("SELECT p FROM Instrumento p where p.status >= 0 AND p.id = :id")
+    Instrumento listarInstrumentoPorId(@Param("id") Integer instrumentoId);
+
+    @Query("SELECT p FROM Instrumento p where p.status >=0 AND p.usuario.id = :usuarioId")
+    List<Instrumento> listarInstrumentosUsuario(@Param("usuarioId") Integer usuarioId);
 }

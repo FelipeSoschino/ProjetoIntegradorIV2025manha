@@ -22,8 +22,8 @@ public class SecurityConfiguration {
     private UserAuthenticationFilter userAuthenticationFilter;
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
-            "api/usuario/login", // Url que usaremos para fazer login
-            "api/usuario/criar", // Url que usaremos para criar um usuário
+            "/api/usuario/login", // Url que usaremos para fazer login
+            "/api/usuario/criar", // Url que usaremos para criar um usuário
             // 🔓 Swagger/OpenAPI UI
             "/v3/api-docs/**",
             "/swagger-ui/**",
@@ -31,15 +31,21 @@ public class SecurityConfiguration {
     };
     // Endpoints que requerem autenticação para serem acessados
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
-            "/usuario/listar"
+            "/api/usuario/listar"
+
     };
     // Endpoints que só podem ser acessador por usuários com permissão de cliente
     public static final String [] ENDPOINTS_CUSTOMER = {
-            "/jogo"
+            "/api/topico/listar",
+            "/api/topico/**",
+            "/api/post/**",
+            "/api/participa/**",
+            "/api/curtida/**",
+            "/api/instrumento/**"
     };
     // Endpoints que só podem ser acessador por usuários com permissão de administrador
     public static final String [] ENDPOINTS_ADMIN = {
-            "/categoria"
+            "/instrumento"
     };
 
     @Bean
@@ -50,8 +56,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() //adicionado para funcionamento do swagger
-                        .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMINISTRATOR")
-                        .requestMatchers(ENDPOINTS_CUSTOMER).hasRole("CUSTOMER")
+                        .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMINISTRADOR")
+                        .requestMatchers(ENDPOINTS_CUSTOMER).hasRole("USUARIO")
                         .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
                         .anyRequest().denyAll()
                 )
