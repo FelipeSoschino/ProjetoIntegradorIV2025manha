@@ -12,7 +12,7 @@ public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="comentario_id")
-    private int id;
+    private Integer id;
 
     @Column(name="comentario_texto")
     private String texto;
@@ -49,11 +49,11 @@ public class Comentario {
 
     @Transient
     @JsonProperty("idUsuario")
-    private int idUsuario;
+    private Integer idUsuario;
 
     @Transient
     @JsonProperty("idPost")
-    private int idPost;
+    private Integer idPost;
 
     @Transient
     @JsonProperty("idTopico")
@@ -91,11 +91,11 @@ public class Comentario {
     @JoinColumn(name = "comentario_resposta_id")
     private Comentario comentario; // Comentario Resposta
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

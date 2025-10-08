@@ -16,7 +16,7 @@ public class Topico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="topico_id")
-    private int id;
+    private Integer id;
 
     @Column(name="topico_titulo")
     private String titulo;
@@ -60,11 +60,11 @@ public class Topico {
     public Set<Participa> participa;
 
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -11,4 +11,18 @@ public class InstrumentoDTORequest {
     }
 
     private String nome;
+
+    private int status;
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    private int idUsuario;
+
+
 }

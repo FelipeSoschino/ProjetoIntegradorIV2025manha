@@ -1,6 +1,7 @@
 package com.senac.forum_musicos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -42,11 +43,23 @@ public class Instrumento {
     }
 
     public void setStatus(int status) {
-        status = status;
+        this.status = status;
     }
 
     @Column(name = "instrumento_status")
     private int status;
+
+    @Transient
+    @JsonProperty("idUsuario")
+    private int idUsuario;
+
+    public int getIdUsuario() {
+        return idUsuario = this.usuario.getId();
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     @ManyToOne
     @JsonIgnore

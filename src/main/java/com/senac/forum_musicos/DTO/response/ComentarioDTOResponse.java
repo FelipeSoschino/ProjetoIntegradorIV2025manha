@@ -2,11 +2,11 @@ package com.senac.forum_musicos.DTO.response;
 
 public class ComentarioDTOResponse {
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -26,7 +26,7 @@ public class ComentarioDTOResponse {
         this.status = status;
     }
 
-    private int id;
+    private Integer id;
 
     private String texto;
 

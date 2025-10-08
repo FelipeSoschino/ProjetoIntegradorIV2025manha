@@ -31,17 +31,18 @@ public class SecurityConfiguration {
     };
     // Endpoints que requerem autenticação para serem acessados
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
-            "/api/usuario/listar"
+            "/api/usuario/listar",
+            "/api/topico/listar"
 
     };
     // Endpoints que só podem ser acessador por usuários com permissão de cliente
     public static final String [] ENDPOINTS_CUSTOMER = {
-            "/api/topico/listar",
             "/api/topico/**",
             "/api/post/**",
             "/api/participa/**",
             "/api/curtida/**",
-            "/api/instrumento/**"
+            "/api/instrumento/**",
+            "/api/comentario/**"
     };
     // Endpoints que só podem ser acessador por usuários com permissão de administrador
     public static final String [] ENDPOINTS_ADMIN = {

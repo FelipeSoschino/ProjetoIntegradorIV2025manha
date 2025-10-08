@@ -20,5 +20,25 @@ public class InstrumentoDTOResponse {
 
     private String nome;
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    private int status;
+
     private int id;
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    private int idUsuario;
 }
