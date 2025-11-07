@@ -23,7 +23,8 @@ public class SecurityConfiguration {
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
             "/api/usuario/login", // Url que usaremos para fazer login
-            "/api/usuario/criar", // Url que usaremos para criar um usuário
+            "/api/usuario/criar",
+            "/api/admin/reset",// Url que usaremos para criar um usuário
             // 🔓 Swagger/OpenAPI UI
             "/v3/api-docs/**",
             "/swagger-ui/**",
@@ -32,7 +33,8 @@ public class SecurityConfiguration {
     // Endpoints que requerem autenticação para serem acessados
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
             "/api/usuario/listar",
-            "/api/topico/listar"
+            "/api/topico/listar",
+
 
     };
     // Endpoints que só podem ser acessador por usuários com permissão de cliente

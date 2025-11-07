@@ -22,6 +22,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     List<Usuario> listarUsuarios();
     @Query("SELECT p FROM Usuario p where p.status >= 0 AND p.id = :id")
     Usuario listarUsuarioPorId(@Param("id") Integer id);
+    @Query("DELETE FROM Usuario u")
+    void deletarTodosUsuarios();
 
     Optional<Usuario> findByEmail(String email);
+
 }

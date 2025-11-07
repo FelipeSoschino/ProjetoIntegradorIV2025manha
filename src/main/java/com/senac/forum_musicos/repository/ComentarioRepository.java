@@ -23,4 +23,7 @@ public interface ComentarioRepository extends JpaRepository<Comentario, Integer>
     @Query("SELECT p FROM Comentario p where p.status >= 0 AND p.id = :id")
     Comentario listarComentarioPorId(@Param("id") Integer comentarioId);
 
+    @Query("DELETE FROM Comentario c")
+    void deletarTodosComentarios();
+
 }

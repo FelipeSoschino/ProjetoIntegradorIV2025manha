@@ -17,11 +17,15 @@ public interface TopicoRepository extends JpaRepository<Topico, Integer> {
     @Query("UPDATE Topico p SET p.status = -1 where p.id = :id")
     void apagarTopico(@Param("id") Integer topicoId);
 
-    @Query("SELECT p FROM Topico p where p.status >= 0")
+    @Query("SELECT p FROM Topico p WHERE p.status >= 0")  // Adicionado LEFT JOIN FETCH para carregar posts
     List<Topico> listarTopicos();
     @Query("SELECT p FROM Topico p where p.status >= 0 AND p.id = :id")
     Topico listarTopicoPorId(@Param("id") Integer topicoId);
 
     @Query("SELECT p FROM Topico p where p.status >=0 and p.usuario.id = :usuarioId")
     List<Topico> listarTopicosUsuario(@Param("usuarioId")Integer usuarioId);
+    @Query("DELETE FROM Topico t")
+    void deletarTodosTopicos();
 }
+//    @Query("SELECT p FROM Topico p LEFT JOIN FETCH p.posts WHERE p.status >= 0")  // Adicionado LEFT JOIN FETCH para carregar posts
+//    List<Topico> listarTopicos();

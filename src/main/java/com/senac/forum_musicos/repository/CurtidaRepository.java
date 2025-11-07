@@ -22,4 +22,7 @@ public interface CurtidaRepository extends JpaRepository<Curtida, Integer> {
     List<Curtida> listarCurtidas();
     @Query("SELECT p FROM Curtida p where p.status >= 0 AND p.id = :id")
     Curtida listarCurtidaPorId(@Param("id") Integer curtidaId);
+
+    @Query("DELETE FROM Curtida c")
+        void deletarTodasCurtidas();
 }

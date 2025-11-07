@@ -18,11 +18,16 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Query("UPDATE Post p SET p.status = -1 where p.id = :id")
     void apagarPost(@Param("id") Integer postId);
 
-    @Query("SELECT p FROM Post p LEFT JOIN FETCH p.topico WHERE p.status >= 0")
+    @Query("SELECT p FROM Post p WHERE p.status >= 0")
     List<Post> listarPosts();
     @Query("SELECT p FROM Post p where p.status >= 0 AND p.id = :id")
     Post listarPostPorId(@Param("id") Integer postId);
 
     @Query("SELECT p FROM Post p where p.status >=0 and p.usuario.id = :usuarioId")
     List<Post> listarPostsUsuadio(@Param("usuarioId")Integer usuarioId);
+    @Query("DELETE FROM Post p")
+    void deletarTodosPosts();
 }
+
+////    @Query("SELECT p FROM Post p LEFT JOIN FETCH p.topico WHERE p.status >= 0")
+//    List<Post> listarPosts();

@@ -23,4 +23,7 @@ public interface ParticipaRepository extends JpaRepository<Participa, Integer> {
     List<Participa> listarParticipas();
     @Query("SELECT p FROM Participa p where p.status >= 0 AND p.id = :id")
     Participa listarParticipaPorId(@Param("id") Integer participaId);
+
+    @Query("DELETE FROM Participa p")
+    void deletarTodosParticipa();
 }

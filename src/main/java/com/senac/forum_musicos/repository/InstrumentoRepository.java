@@ -25,4 +25,7 @@ public interface InstrumentoRepository extends JpaRepository<Instrumento, Intege
 
     @Query("SELECT p FROM Instrumento p where p.status >=0 AND p.usuario.id = :usuarioId")
     List<Instrumento> listarInstrumentosUsuario(@Param("usuarioId") Integer usuarioId);
+    @Query("DELETE FROM Instrumento i")
+    void deletarTodosInstrumentos();
+
 }
