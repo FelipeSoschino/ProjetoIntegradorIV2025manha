@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Verificar Repositório') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], useRemoteConfigs: [[url: 'https://github.com/FelipeSoschino/ProjetoIntegradorIV2025manh-.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], useRemoteConfigs: [[url: 'https://github.com/FelipeSoschino/ProjetoIntegradorIV2025manh-']]])
             }
         }
 
@@ -29,7 +29,6 @@ pipeline {
                 }
             }
         }
-
 
         stage('Fazer Deploy') {
             steps {
