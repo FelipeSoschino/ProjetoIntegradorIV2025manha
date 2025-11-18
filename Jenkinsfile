@@ -13,7 +13,7 @@ pipeline {
                     // Atualiza o PATH se necessário
                     env.PATH = "/usr/bin:$PATH"
                     // Instalar as dependências Maven antes de compilar o projeto
-                    bat 'mvn clean install'  // Instala as dependências do Maven
+                    bat 'mvnw clean install'  // Instala as dependências do Maven
                 }
             }
         }
@@ -30,10 +30,11 @@ pipeline {
             }
         }
 
+
         stage('Fazer Deploy') {
             steps {
                 script {
-                    def appName = 'projeto1'
+                    def appName = 'forum_musicos'
                     def imageTag = "${appName}:${env.BUILD_ID}"
 
                     // Parar e remover o container existente, se houver
