@@ -21,7 +21,7 @@ pipeline {
         stage('Construir Imagem Docker') {
             steps {
                 script {
-                    def appName = 'forum_musicos'
+                    def appName = 'soundcircle'
                     def imageTag = "${appName}:${env.BUILD_ID}"
 
                     // Construir a imagem Docker
@@ -34,7 +34,7 @@ pipeline {
        stage('Fazer Deploy') {
                   steps {
                       script {
-                          def appName = 'forum_musicos'
+                          def appName = 'soundcircle'
                           def imageTag = "${appName}:${env.BUILD_ID}"
 
                           // Parar e remover o container existente, se houver
@@ -42,7 +42,7 @@ pipeline {
                   		sh "docker rm -v ${appName} || exit 0"  // Remover o container e os volumes associados
 
                           // Executar o novo container
-                          sh "docker run -d --name ${appName} -p 8080:8080 ${imageTag}"
+                          sh "docker run -d --name ${appName} -p 8413:8413 ${imageTag}"
 
                       }
                   }
