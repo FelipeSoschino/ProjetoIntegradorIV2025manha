@@ -1,7 +1,5 @@
 package com.senac.forum_musicos.DTO.request;
 
-
-import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,7 +29,6 @@ public class UsuarioDTORequest {
         this.bio = bio;
     }
 
-
     public LocalDateTime getData() {
         return data;
     }
@@ -41,7 +38,6 @@ public class UsuarioDTORequest {
     }
 
     private String nome;
-
 
     public String getEmail() {
         return email;
@@ -58,17 +54,7 @@ public class UsuarioDTORequest {
     private String bio;
     private List<String> roleList;
 
-
-
-    public File getFoto() {
-        return foto;
-    }
-
-    public void setFoto(File foto) {
-        this.foto = foto;
-    }
-
-    private File foto;
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime data;
 
     public int getStatus() {
@@ -80,6 +66,7 @@ public class UsuarioDTORequest {
     }
 
     private int status;
+
     public List<String> getRoleList() {
         return roleList;
     }

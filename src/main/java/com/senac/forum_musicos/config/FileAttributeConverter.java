@@ -1,4 +1,4 @@
-//package com.senac.forum_musicos.config;
+package com.senac.forum_musicos.config;//package com.senac.forum_musicos.config;
 //import jakarta.persistence.AttributeConverter;
 //import jakarta.persistence.Converter;
 //import java.io.File;

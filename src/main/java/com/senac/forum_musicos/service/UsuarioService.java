@@ -26,7 +26,7 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository){
+    public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 
@@ -42,17 +42,17 @@ public class UsuarioService {
     @Autowired
     private SecurityConfiguration securityConfiguration;
 
-    public List<Usuario> listarUsuarios(){
+    public List<Usuario> listarUsuarios() {
         return this.usuarioRepository.listarUsuarios();
     }
 
-    public Usuario listarUsuarioPorId(Integer usuarioId){
+    public Usuario listarUsuarioPorId(Integer usuarioId) {
         return this.usuarioRepository.listarUsuarioPorId(usuarioId);
     }
 
-    public UsuarioDTOLoginResponse login(UsuarioDTOLoginRequest usuarioDTOLoginRequest){
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                new UsernamePasswordAuthenticationToken(usuarioDTOLoginRequest.getEmail(), usuarioDTOLoginRequest.getSenha());
+    public UsuarioDTOLoginResponse login(UsuarioDTOLoginRequest usuarioDTOLoginRequest) {
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+                usuarioDTOLoginRequest.getEmail(), usuarioDTOLoginRequest.getSenha());
 
         // Autentica o usuário com as credenciais fornecidas
         Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
@@ -68,9 +68,9 @@ public class UsuarioService {
         return usuarioDTOLoginResponse;
     }
 
-    public UsuarioDTOResponse criarUsuario(UsuarioDTORequest usuarioDTORequest){
+    public UsuarioDTOResponse criarUsuario(UsuarioDTORequest usuarioDTORequest) {
         List<Role> roles = new ArrayList<Role>();
-        for (int i=0; i<usuarioDTORequest.getRoleList().size(); i++){
+        for (int i = 0; i < usuarioDTORequest.getRoleList().size(); i++) {
             Role role = new Role();
             role.setName(RoleName.valueOf(usuarioDTORequest.getRoleList().get(i)));
             roles.add(role);
@@ -80,7 +80,8 @@ public class UsuarioService {
         usuario.setEmail(usuarioDTORequest.getEmail());
         usuario.setBio(usuarioDTORequest.getBio());
         usuario.setData(usuarioDTORequest.getData());
-        usuario.setFoto(usuarioDTORequest.getFoto());
+        usuario.setData(usuarioDTORequest.getData());
+        // usuario.setFoto(null); // Field removed from DTO
         usuario.setNome(usuarioDTORequest.getNome());
         usuario.setSenha(securityConfiguration.passwordEncoder().encode(usuarioDTORequest.getSenha()));
         usuario.setStatus(1);
@@ -95,37 +96,36 @@ public class UsuarioService {
         usuarioDTOResponse.setData(usuarioSave.getData());
         usuarioDTOResponse.setStatus(usuarioSave.getStatus());
         usuarioDTOResponse.setFoto(usuarioSave.getFoto());
-        return usuarioDTOResponse;}
-
-    public UsuarioDTOResponse atualizarUsuario(Integer usuarioId, UsuarioDTORequest usuarioDTORequest){
-        Usuario usuario = this.listarUsuarioPorId(usuarioId);
-        if(usuario!=null){
-            modelMapper.map(usuarioDTORequest,usuario);
-            Usuario usuarioSave = this.usuarioRepository.save(usuario);
-            UsuarioDTOResponse usuarioDTOResponse = modelMapper.map(usuarioSave,UsuarioDTOResponse.class);
-            return usuarioDTOResponse;
-        }
-        else {return null;}
+        return usuarioDTOResponse;
     }
 
-    public UsuarioDTOUpdateResponse atualizarStatusUsuario(Integer usuarioId, UsuarioDTOUpdateRequest usuarioDTOUpdateRequest) {
+    public UsuarioDTOResponse atualizarUsuario(Integer usuarioId, UsuarioDTORequest usuarioDTORequest) {
+        Usuario usuario = this.listarUsuarioPorId(usuarioId);
+        if (usuario != null) {
+            modelMapper.map(usuarioDTORequest, usuario);
+            Usuario usuarioSave = this.usuarioRepository.save(usuario);
+            UsuarioDTOResponse usuarioDTOResponse = modelMapper.map(usuarioSave, UsuarioDTOResponse.class);
+            return usuarioDTOResponse;
+        } else {
+            return null;
+        }
+    }
+
+    public UsuarioDTOUpdateResponse atualizarStatusUsuario(Integer usuarioId,
+            UsuarioDTOUpdateRequest usuarioDTOUpdateRequest) {
         Usuario usuario = this.listarUsuarioPorId(usuarioId);
         if (usuario != null) {
             modelMapper.map(usuarioDTOUpdateRequest, usuario);
             Usuario usuarioSave = this.usuarioRepository.save(usuario);
 
-            UsuarioDTOUpdateResponse usuarioDTOUpdateResponse = modelMapper.map(usuarioSave, UsuarioDTOUpdateResponse.class);
+            UsuarioDTOUpdateResponse usuarioDTOUpdateResponse = modelMapper.map(usuarioSave,
+                    UsuarioDTOUpdateResponse.class);
             return usuarioDTOUpdateResponse;
         } else
             return null;
     }
 
-    public void apagarUsuario(Integer usuarioId){
+    public void apagarUsuario(Integer usuarioId) {
         this.usuarioRepository.apagarUsuario(usuarioId);
     }
 }
-
-
-
-
-
