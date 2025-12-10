@@ -25,9 +25,12 @@ import java.util.List;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final com.senac.forum_musicos.repository.RoleRepository roleRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository,
+            com.senac.forum_musicos.repository.RoleRepository roleRepository) {
         this.usuarioRepository = usuarioRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Autowired
@@ -69,11 +72,17 @@ public class UsuarioService {
     }
 
     public UsuarioDTOResponse criarUsuario(UsuarioDTORequest usuarioDTORequest) {
-        List<Role> roles = new ArrayList<Role>();
-        for (int i = 0; i < usuarioDTORequest.getRoleList().size(); i++) {
-            Role role = new Role();
-            role.setName(RoleName.valueOf(usuarioDTORequest.getRoleList().get(i)));
+        List<Role> roles = new ArrayList<>();
+        if (usuarioDTORequest.getRoleList() == null || usuarioDTORequest.getRoleList().isEmpty()) {
+            Role role = roleRepository.findByName(RoleName.ROLE_USUARIO)
+                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(role);
+        } else {
+            for (String roleStr : usuarioDTORequest.getRoleList()) {
+                Role role = roleRepository.findByName(RoleName.valueOf(roleStr))
+                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                roles.add(role);
+            }
         }
 
         Usuario usuario = new Usuario();
