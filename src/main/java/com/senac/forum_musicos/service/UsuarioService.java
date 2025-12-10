@@ -79,8 +79,7 @@ public class UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setEmail(usuarioDTORequest.getEmail());
         usuario.setBio(usuarioDTORequest.getBio());
-        usuario.setData(usuarioDTORequest.getData());
-        usuario.setData(usuarioDTORequest.getData());
+        usuario.setData(java.time.LocalDateTime.now()); // Automatic storage date
         // usuario.setFoto(null); // Field removed from DTO
         usuario.setNome(usuarioDTORequest.getNome());
         usuario.setSenha(securityConfiguration.passwordEncoder().encode(usuarioDTORequest.getSenha()));
